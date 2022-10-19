@@ -19,10 +19,10 @@ dt = datetime.now()
 request_date = str(dt.year) + "-" + str(dt.month).zfill(2) + "-" + str(dt.day).zfill(2)  
 print("Generated today's date: " + str(request_date))
 
-
+#infomācijas pieprasījums  API
 print("Request url: " + str(nasa_api_url + "rest/v1/feed?start_date=" + request_date + "&end_date=" + request_date + "&api_key=" + nasa_api_key))
 r = requests.get(nasa_api_url + "rest/v1/feed?start_date=" + request_date + "&end_date=" + request_date + "&api_key=" + nasa_api_key)
-
+#atbildes izdruka no NASA
 print("Response status code: " + str(r.status_code))
 print("Response headers: " + str(r.headers))
 print("Response content: " + str(r.text))
@@ -33,7 +33,7 @@ if r.status_code == 200:
 
 	ast_safe = []
 	ast_hazardous = []
-
+#elementu aprēķināšana
 	if 'element_count' in json_data:
 		ast_count = int(json_data['element_count'])
 		print("Asteroid count today: " + str(ast_count))
@@ -96,7 +96,7 @@ if r.status_code == 200:
 
 		else:
 			print("No asteroids are going to hit earth today")
-
+#rezultātu izdruka
 	print("Hazardous asteorids: " + str(len(ast_hazardous)) + " | Safe asteroids: " + str(len(ast_safe)))
 
 	if len(ast_hazardous) > 0:
